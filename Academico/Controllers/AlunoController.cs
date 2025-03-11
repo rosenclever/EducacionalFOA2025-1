@@ -13,10 +13,23 @@ namespace Academico.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Aluno aluno)
+        public IActionResult Create([Bind("Nome", "Email", "Telefone", "Endereco", "Complemento", "Bairro", "Municipio", "Uf", "Cep")] Aluno aluno)
         {
-            alunos.Add(aluno);
-            return RedirectToAction("Index");
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    aluno.AlunoID = alunos.Count + 1;
+                    alunos.Add(aluno);
+                    return RedirectToAction("Index");
+                }
+                return View(aluno);
+            }
+            catch(Exception ex)
+            {
+                ViewData["Erro"] = ex.Message;
+                return View(aluno);
+            }
         }
 
         public IActionResult Index()
