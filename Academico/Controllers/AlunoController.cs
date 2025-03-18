@@ -1,11 +1,19 @@
-﻿using Academico.Models;
+﻿using Academico.Data;
+using Academico.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Academico.Controllers
 {
     public class AlunoController : Controller
     {
-        private static List<Aluno> alunos = new List<Aluno>();
+        private readonly AcademicoContext _context;
+
+        public AlunoController(AcademicoContext context)
+        {
+            _context = context;
+        }
+
         public IActionResult Create()
         {
             return View();
@@ -19,8 +27,7 @@ namespace Academico.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    aluno.AlunoID = alunos.Count + 1;
-                    alunos.Add(aluno);
+                    
                     return RedirectToAction("Index");
                 }
                 return View(aluno);
@@ -32,9 +39,9 @@ namespace Academico.Controllers
             }
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View(alunos);
+            return View(await _context.Alunos.OrderBy(a => a.Nome).ToListAsync());
         }
     }
 }
