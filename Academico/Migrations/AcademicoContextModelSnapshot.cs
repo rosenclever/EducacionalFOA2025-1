@@ -66,7 +66,7 @@ namespace Academico.Migrations
 
                     b.HasKey("AlunoID");
 
-                    b.ToTable("Alunos");
+                    b.ToTable("Alunos", (string)null);
                 });
 #pragma warning restore 612, 618
         }

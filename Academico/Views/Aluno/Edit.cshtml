@@ -1,19 +1,18 @@
 ﻿@model Academico.Models.Aluno
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Editando de dados de aluno";
 }
 
-<h1>Create</h1>
+<h1>Editando</h1>
 
 <h4>Aluno</h4>
 <hr />
-@ViewData["Erro"]
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-           
+            <input type="hidden" asp-for="AlunoID" />
             <div class="form-group">
                 <label asp-for="Nome" class="control-label"></label>
                 <input asp-for="Nome" class="form-control" />
@@ -52,10 +51,10 @@
             <div class="form-group">
                 <label asp-for="Uf" class="control-label"></label>
                 <select asp-for="Uf" class="form-control">
-					<option value="AC">Acre</option>
-					<option value="AL">Alagoas</option>
-					<option value="AP">Amapá</option>
-					<option value="AM">Amazonas</option>
+                    <option value="AC">Acre</option>
+                    <option value="AL">Alagoas</option>
+                    <option value="AP">Amapá</option>
+                    <option value="AM">Amazonas</option>
                     <option value="BA">Bahia</option>
                     <option value="CE">Ceará</option>
                     <option value="DF">Distrito Federal</option>
@@ -80,7 +79,7 @@
                     <option value="SE">Sergipe</option>
                     <option value="TO">Tocantins</option>
                     <option value="EX">Estrangeiro</option>
-					<option value="NE">Não Especificado</option>
+                    <option value="NE">Não Especificado</option>
                 </select>
                 <span asp-validation-for="Uf" class="text-danger"></span>
             </div>
@@ -89,9 +88,8 @@
                 <input asp-for="Cep" class="form-control" />
                 <span asp-validation-for="Cep" class="text-danger"></span>
             </div>
-			<input type="hidden" asp-for="AlunoID" />
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
     </div>
